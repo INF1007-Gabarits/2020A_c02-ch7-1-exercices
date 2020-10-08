@@ -8,6 +8,7 @@ def get_fibonacci_number(TODO):
 	pass
 
 def get_fibonacci_sequence(TODO):
+	pass
 
 def get_sorted_dict_by_decimals(TODO):
 	pass
