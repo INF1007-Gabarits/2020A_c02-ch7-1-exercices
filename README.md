@@ -31,7 +31,7 @@ Résultat :
 ## 2. Nombres de Fibonacci (séquence entière)
 ### `get_fibonacci_sequence`
 
-Écrivez une fonction qui retourne la séquence de Fibonacci d'une taille donnée (donc taille 2 veut dire 2 éléments). Faites le tout en une seule instruction `return` (donc nécessairement de façon récursive)
+Écrivez une fonction qui retourne la séquence de Fibonacci d'une taille donnée (donc taille 2 veut dire 2 éléments). Faites le tout en une seule instruction `return` (donc nécessairement de façon récursive). N'utilisez pas la fonction du numéro 1 pour générer les nombres
 
 Exemple :
 ```python
@@ -50,6 +50,8 @@ Résultat :
 ### `get_sorted_dict_by_decimals`
 
 Écrivez une fonction qui retourne un dictionnaire trié en ordre croissant de la partie décimales des valeurs. Par partie décimale, on veut dire que par exemple 0.9 est plus grand que 0.42, donc tout simplement une comparaison avec la partie entière enlevée.
+
+Faites le tout sur une seule ligne en utilisant la fonction `sorted` de Python.
 
 Exemple :
 ```python
@@ -77,7 +79,7 @@ Résultat :
 ## 4. Nombres de Fibonacci (générateur)
 ### `fibonacci_numbers`
 
-Créez une fonction génératrice (un générateur) de nombre de Fibonacci. Contrairement au numéro 2, vous ne devez pas retourner une liste de la séquence au complet, mais plutôt générer les nombres à mesure à l'aide de `yield`. Vous ne devez pas garder en mémoire toute la série, mais seulement les éléments nécessaires, donc les deux derniers à tout moment.
+Créez une fonction génératrice (un générateur) de nombres de Fibonacci. Contrairement au numéro 2, vous ne devez pas retourner une liste de la séquence au complet, mais plutôt générer les nombres à mesure à l'aide de `yield`. Vous ne devez pas garder en mémoire toute la série, mais seulement les éléments nécessaires, donc les deux derniers à tout moment.
 
 Exemple :
 ```python
