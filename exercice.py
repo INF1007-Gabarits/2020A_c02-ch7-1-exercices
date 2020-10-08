@@ -4,45 +4,16 @@
 from collections import deque
 
 
-def get_fibonacci_number(index):
-	return (
-		0 if index == 0 else
-		1 if index == 1 else
-		get_fibonacci_number(index - 1) + get_fibonacci_number(index - 2)
-	)
+def get_fibonacci_number(TODO):
+	pass
 
-def get_fibonacci_sequence(length, sequence=[0, 1]):
-	return (
-		sequence[0:length] if length <= len(sequence) else
-		get_fibonacci_sequence(length, sequence + [sequence[-1] + sequence[-2]])
-	)
+def get_fibonacci_sequence(TODO):
 
-def get_sorted_dict_by_decimals(dict_arg):
-	return dict(sorted(dict_arg.items(), key = lambda elem: elem[1] % 1.0))
+def get_sorted_dict_by_decimals(TODO):
+	pass
 
-def fibonacci_numbers(length):
-	yield 0
-	if length >= 2:
-		yield 1
-	last_elems = deque([0, 1])
-	for i in range(2, length):
-		fibo_number = last_elems[0] + last_elems[1]
-		last_elems.append(fibo_number)
-		last_elems.popleft()
-		yield fibo_number
-
-def build_recursive_sequence_generator(initial_values, definition, keep_whole_sequence=False):
-	def recursive_generator(length):
-		for elem in zip(initial_values, range(length)):
-			yield elem[0]
-		last_elems = deque(initial_values)
-		for i in range(len(initial_values), length):
-			current_number = definition(last_elems)
-			last_elems.append(current_number)
-			if not keep_whole_sequence:
-				last_elems.popleft()
-			yield current_number
-	return recursive_generator
+def build_recursive_sequence_generator(TODO):
+	pass
 
 if __name__ == "__main__":
 	print([get_fibonacci_number(0), get_fibonacci_number(1), get_fibonacci_number(2)])
@@ -81,9 +52,9 @@ if __name__ == "__main__":
 		print(fi, end=" ")
 	print("\n")
 
-	lucas = build_recursive_sequence_generator([2, 1], lambda seq: seq[-1] + seq[-2])
+	lucas = build_recursive_sequence_generator(TODO)
 	print(f"Lucas : {[elem for elem in lucas(10)]}")
-	perrin = build_recursive_sequence_generator([3, 0, 2], lambda seq: seq[-2] + seq[-3])
+	perrin = build_recursive_sequence_generator(TODO)
 	print(f"Perrin : {[elem for elem in perrin(10)]}")
-	hofstadter_q = build_recursive_sequence_generator([1, 1], lambda seq: seq[-seq[-1]] + seq[-seq[-2]], True)
+	hofstadter_q = build_recursive_sequence_generator(TODO)
 	print(f"Hofstadter-Q : {[elem for elem in hofstadter_q(10)]}")
