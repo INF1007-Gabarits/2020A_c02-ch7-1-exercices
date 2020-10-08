@@ -1,112 +1,133 @@
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod-redirect-0.herokuapp.com/)
 
-# Vérifications de balises de style HTML (chapitre 6.3)
+# Exercices en vrac (chapitre 7.1)
 
 Avant de commencer. Consulter les instructions à suivre dans [instructions.md](instructions.md)
 
-À moins d'indications contraires, vous devez retourner les résultats des fonctions, pas les afficher directement.
+À moins d'indications contraires, vous devez retourner les résultats des fonctions, pas les afficher directement. Vous devez, pour chaque exercice, choisir les paramètres appropriés.
 
-## 1. Réchauffement
-### `check_brackets`
+## 1. Nombres de Fibonacci (nombre unique)
+### `get_fibonacci_number`
 
-Vérifiez les fermetures dans un texte. Les parenthèses sont un exemple de fermeture. On veut dire n'importe-quel caractère d'ouverture et de fermeture qui sont passés en 2e paramètre de la fonction sous forme d'un tuple (ou d'une liste) de la forme `("ouverture1", "fermeture1", "ouverture2", "fermeture2")`. Par exemple si on vérifie les parenthèses (`(` avec `)`) et les accolades (`{` avec `}`). On aurait le tuple `("(", ")", "{", "}")`. On retourne vrai si les fermetures sont bonnes, faux sinon.
+Écrivez une fonction qui calculent le nombre de Fibonacci pour un index donné (index partent à 0). La définition récursive de la suite de Fibonacci est :
 
-Exemple :
-```python
-brackets = ("(", ")", "{", "}")
-yeet = "(yeet){yeet}"
-yeeet = "({yeet})"
-yeeeet = "({yeet)}"
-yeeeeet = "(yeet"
-print(check_brackets(yeet, brackets))
-print(check_brackets(yeeet, brackets))
-print(check_brackets(yeeeet, brackets))
-print(check_brackets(yeeeeet, brackets))
-```
-Résultat :
-```
-True
-True
-False
-False
-```
+*F*<sub>0</sub> = 0 <br>
+*F*<sub>1</sub> = 1 <br>
+*F*<sub>*i*</sub> = *F*<sub>*i* - 1</sub> + *F*<sub>*i* - 2</sub>
 
-## 2. Élimination des commentaires
-### `remove_comments`
-
-Enlevez les commentaires d'un texte à l'aide de balises d'ouverture et de fermeture spécifiées en paramètre. Si les commentaires sont mal formés, on retourne `None`.
+Faites le tout en une seule instruction `return` (donc nécessairement de façon récursive)
 
 Exemple :
 ```python
-spam = "Hello, /* OOGAH BOOGAH */world!"
-eggs = "Hello, /* OOGAH BOOGAH world!"
-parrot = "Hello, OOGAH BOOGAH*/ world!"
-print(remove_comments(spam, "/*", "*/"))
-print(remove_comments(eggs, "/*", "*/"))
-print(remove_comments(parrot, "/*", "*/"))
+print([get_fibonacci_number(0), get_fibonacci_number(1), get_fibonacci_number(2)])
+print([get_fibonacci_number(i) for i in range(10)])
 ```
 Résultat :
 ```
-Hello, world!
-None
-None
+[0, 1, 1]
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
-## 3. Identification d'une balise au début d'un texte
-### `get_tag_prefix`
+## 2. Nombres de Fibonacci (séquence entière)
+### `get_fibonacci_sequence`
 
-Trouvez si une string commence par une balise d'ouverture ou de fermeture. Les balises sont passées en paramètres sous formes de deux tuples (ou listes). Si la string commence par une balise d'ouverture, on retourne `(la_balise, None)`, si elle commence par une balise de fermeture, on retourne `(None, la_balise)`, sinon on retourne `(None, None)`.
+Écrivez une fonction qui retourne la séquence de Fibonacci d'une taille donnée (donc taille 2 veut dire 2 éléments). Faites le tout en une seule instruction `return` (donc nécessairement de façon récursive)
 
 Exemple :
 ```python
-otags = ("<head>", "<body>", "<h1>")
-ctags = ("</head>", "</body>", "</h1>")
-print(get_tag_prefix("<body><h1>Hello!</h1></body>", otags, ctags))
-print(get_tag_prefix("<h1>Hello!</h1></body>", otags, ctags))
-print(get_tag_prefix("Hello!</h1></body>", otags, ctags))
-print(get_tag_prefix("</h1></body>", otags, ctags))
-print(get_tag_prefix("</body>", otags, ctags))
+print(get_fibonacci_sequence(1))
+print(get_fibonacci_sequence(2))
+print(get_fibonacci_sequence(10))
 ```
 Résultat :
 ```
-('<body>', None)
-('<h1>', None)
-(None, None)
-(None, '</h1>')
-(None, '</body>')
+[0]
+[0, 1]
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
-## 4. Vérification des balises d'un HTML restreint
-### `check_tags`
+## 3. Trier un dictionnaire par les décimales des valeurs
+### `get_sorted_dict_by_decimals`
 
-Vérifiez que les balises d'un fichier de style HTML simplifié sont bien fermées. Les noms des balises sont passées en paramètre, mais sans les chevrons (donc "html", "head" par exemple). On doit enlever les commentaires, mais on ignore toutes les balises vides telles que `<br>` ou `<head/>`. On ne vérifie pas le `DOCTYPE` non plus. On s'en tient vraiment justes aux balises ouvrantes et fermantes. On retourne vrai si les fermetures sont bonnes, faux sinon.
-
-Syntaxe HTML de base (pour référence) : https://www.tutorialrepublic.com/html-tutorial/html-elements.php
+Écrivez une fonction qui retourne un dictionnaire trié en ordre croissant de la partie décimales des valeurs. Par partie décimale, on veut dire que par exemple 0.9 est plus grand que 0.42, donc tout simplement une comparaison avec la partie entière enlevée.
 
 Exemple :
 ```python
-spam = (
-    "<html>"
-    "  <head>"
-    "    <title>"
-    "      <!-- Ici j'ai écrit qqch -->"
-    "      Example"
-    "    </title>"
-    "  </head>"
-    "  <body>"
-    "    <h1>Hello, world</h1>"
-    "    <!-- Les tags vides sont ignorés -->"
-    "    <br>"
-    "    <h1/>"
-    "  </body>"
-    "</html>"
-)
-tags = ("html", "head", "title", "body", "h1")
-comment_tags = ("<!--", "-->")
-print(check_tags(spam, tags, comment_tags))
+spam = {
+	2: 2.1,
+	3: 3.3,
+	1: 1.4,
+	4: 4.2
+}
+eggs = {
+	"foo": 42.6942,
+	"bar": 42.9000,
+	"qux": 69.4269,
+	"yeet": 420.1337
+}
+print(get_sorted_dict_by_decimals(spam))
+print(get_sorted_dict_by_decimals(eggs))
 ```
 Résultat :
 ```
-True
+{2: 2.1, 4: 4.2, 3: 3.3, 1: 1.4}
+{'yeet': 420.1337, 'qux': 69.4269, 'foo': 42.6942, 'bar': 42.9}
+```
+
+## 4. Nombres de Fibonacci (générateur)
+### `fibonacci_numbers`
+
+Créez une fonction génératrice (un générateur) de nombre de Fibonacci. Contrairement au numéro 2, vous ne devez pas retourner une liste de la séquence au complet, mais plutôt générer les nombres à mesure à l'aide de `yield`. Vous ne devez pas garder en mémoire toute la série, mais seulement les éléments nécessaires, donc les deux derniers à tout moment.
+
+Exemple :
+```python
+for fibo_num in fibonacci_numbers(10):
+    print(fibo_num, end=" ")
+```
+Résultat :
+```
+0 1 1 2 3 5 8 13 21 34 
+```
+
+## 5. Générateur de séries récursives génériques
+### `build_recursive_sequence_generator`
+
+Écrivez une fonction qui retourne un générateur de nombres à l'aide d'une définition récursive et qui s'utilise de la même façon que le `fibonacci_numbers` du numéro précédent. La fonction prend en paramètre les valeurs initiales de la suite sous forme de liste, une fonction qui représente la définition récursive de la série et un booléen disant si toute la séquence doit être gardée en mémoire (`False` par défaut). Cette fonction prend en paramètre la liste des derniers éléments de la série.
+
+Par exemple pour créer le générateur de Fibonacci, on devrait faire :
+```python
+def fibo_def(last_elems):
+    return last_elems[-1] + last_elems[-2]
+fibo = build_recursive_sequence_generator([0, 1], fibo_def)
+for fi in fibo(10):
+    print(fi, end=" ")
+```
+Résultat :
+```
+0 1 1 2 3 5 8 13 21 34 
+```
+
+## 6. Créer des générateurs
+
+À l'aide de la fonction du numéro 5, créer des générateurs pour les séries de Lucas, de Perrin et de Hofstadter-Q. Faites chaque création de générateur sur une seule ligne en utilisant des lambda comme deuxième paramètre.
+
+Définition de Lucas : https://en.wikipedia.org/wiki/Lucas_number#Definition <br>
+Définition de Perrin : https://en.wikipedia.org/wiki/Perrin_number <br>
+Définition de Hofstadter-Q : https://en.wikipedia.org/wiki/Hofstadter_sequence#Hofstadter_Q_sequence
+
+Exemple:
+```python
+lucas = build_recursive_sequence_generator(TODO)
+print(f"Lucas : {[elem for elem in lucas(10)]}")
+perrin = build_recursive_sequence_generator(TODO)
+print(f"Perrin : {[elem for elem in perrin(10)]}")
+hofstadter_q = build_recursive_sequence_generator(TODO)
+print(f"Hofstadter-Q : {[elem for elem in hofstadter_q(10)]}")
+```
+Résultat :
+```
+Lucas : [2, 1, 3, 4, 7, 11, 18, 29, 47, 76]
+Perrin : [3, 0, 2, 3, 2, 5, 5, 7, 10, 12]
+Hofstadter-Q : [1, 1, 2, 3, 3, 4, 5, 5, 6, 6]
 ```
 
